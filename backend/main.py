@@ -18,6 +18,7 @@ from pydantic import BaseModel, Field
 from agents import brief_agent, coach_agent, ingest_agent
 from hindsight_client import (
     ensure_bank,
+    ensure_playbook_mental_models,
     recall_facts,
     reflect_facts,
     retain_fact,
@@ -197,10 +198,11 @@ def record_outcome(id: str, payload: OutcomeRequest):
     )
 
     # Retain learning into the global playbook bank
+    ensure_playbook_mental_models()
     learning_content = (
         f"Deal {id} ({deal.get('company', 'Enterprise account')}) value ${deal.get('value', 0)} "
         f"concluded with outcome: {payload.result.upper()}.\n"
-        f"Objections successfully handled: {', '.join(payload.objections_handled or [])}.\n"
+        f"Objections handled: {', '.join(payload.objections_handled or [])}.\n"
         f"Notes and winning strategy: {payload.notes or 'Standard sales cycle.'}"
     )
 
@@ -248,7 +250,7 @@ def admin_seed():
                 detail=f"Failed to read data/deals.json: {str(exc)}",
             )
     else:
-        print("data/deals.json not found; using inline sample deal.")
+        print("data/deals.json not found; using 4 inline sample deals.")
         deals_data = [
             {
                 "id": "deal-1",
@@ -304,7 +306,84 @@ def admin_seed():
                         ),
                     },
                 ],
-            }
+            },
+            {
+                "id": "deal-2",
+                "company": "Acme Freight",
+                "value": 95000,
+                "outcome": None,
+                "calls": [
+                    {
+                        "call_no": 1,
+                        "date": "2026-10-08",
+                        "participants": ["Alice (Sales Rep)", "Mark Torres (VP Logistics)"],
+                        "transcript": (
+                            "Mark Torres: We are hesitant to switch from our existing routing software due to past vendor lock-in. "
+                            "Alice: We offer open API connectors and full data export at any time."
+                        ),
+                    },
+                    {
+                        "call_no": 2,
+                        "date": "2026-10-15",
+                        "participants": ["Alice (Sales Rep)", "Elena Rostova (CFO)"],
+                        "transcript": (
+                            "Elena Rostova: Our Q4 cash flow is strictly managed. Any software investment must show payback in under 6 months. "
+                            "Alice: Based on Acme's fuel efficiency data, our dispatch automation achieves full payback in 4.5 months."
+                        ),
+                    },
+                ],
+            },
+            {
+                "id": "deal-3",
+                "company": "Global Cargo Hub",
+                "value": 250000,
+                "outcome": None,
+                "calls": [
+                    {
+                        "call_no": 1,
+                        "date": "2026-10-09",
+                        "participants": ["Alice (Sales Rep)", "Marcus Vance (VP Operations)"],
+                        "transcript": (
+                            "Marcus Vance: We love the multi-hub tracking features. However, our board requires strict discount thresholds "
+                            "for enterprise tier software."
+                        ),
+                    },
+                    {
+                        "call_no": 2,
+                        "date": "2026-10-16",
+                        "participants": ["Alice (Sales Rep)", "Kevin Miller (CFO)"],
+                        "transcript": (
+                            "Kevin Miller: We cannot approve $250k upfront without a 35% discount. Unless you reduce the contract by $80k, "
+                            "finance will veto this initiative entirely. Alice: We can discuss minor pricing tiers but cannot cut 35%."
+                        ),
+                    },
+                ],
+            },
+            {
+                "id": "deal-4",
+                "company": "Summit Transport",
+                "value": 140000,
+                "outcome": None,
+                "calls": [
+                    {
+                        "call_no": 1,
+                        "date": "2026-10-10",
+                        "participants": ["Alice (Sales Rep)", "Rachel Adams (Director IT)"],
+                        "transcript": (
+                            "Rachel Adams: Webhook reliability is our critical barrier. If webhooks drop during peak freight hours, dispatch stalls. "
+                            "Alice: We offer automated retry queues and a 99.99% webhook delivery SLA backed by credits."
+                        ),
+                    },
+                    {
+                        "call_no": 2,
+                        "date": "2026-10-17",
+                        "participants": ["Alice (Sales Rep)", "Tom Bradley (COO)"],
+                        "transcript": (
+                            "Tom Bradley: If IT signs off on the reliability SLA, operations is ready to greenlight the pilot rollout for our regional depots."
+                        ),
+                    },
+                ],
+            },
         ]
 
     deals_loaded = 0

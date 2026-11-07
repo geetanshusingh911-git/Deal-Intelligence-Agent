@@ -52,9 +52,9 @@ def coach_agent(query: str = "", deal_context: Optional[Dict[str, Any]] = None) 
 
     # Attempt recall from playbook bank
     recalled = recall_facts(playbook_bank, search_query)
+    recalled_texts = [r.get("text", "") for r in recalled if r.get("text")]
     
-    if not recalled:
-        # Check if we have any reflections or if playbook is empty
+    if not recalled_texts:
         reflection = reflect_facts(playbook_bank, search_query)
         if not reflection:
             return {
@@ -62,22 +62,22 @@ def coach_agent(query: str = "", deal_context: Optional[Dict[str, Any]] = None) 
                 "insights": [],
                 "mental_models": [],
             }
+        recalled_texts = [reflection]
 
-    recalled_texts = [r.get("text", "") for r in recalled if r.get("text")]
     prompt = f"""
-Analyze the following cross-deal playbook learnings from previous sales cycles:
+Analyze the following cross-deal playbook learnings and outcomes from past won/lost deals:
 {chr(10).join(f"- {t}" for t in recalled_texts)}
 
-Extract and format into JSON matching these exact shapes:
+Extract actionable guidance and format into JSON matching these exact CONTRACT specifications:
 {{
   "playbook_tips": [
-    {{"tip": "Specific tactical action", "evidence": "Empirical evidence or win-rate observation"}}
+    {{"tip": "Actionable objection-handling recommendation for the sales rep", "evidence": "Concrete evidence citing past won/lost deal strategies (e.g. Northwind Logistics, Acme Freight, Global Cargo Hub)"}}
   ],
   "insights": [
-    {{"text": "Key pattern observed across deals", "confidence": 0.90}}
+    {{"text": "Observed cross-deal pattern or statistical win-rate insight", "confidence": 0.92}}
   ],
   "mental_models": [
-    {{"name": "Framework name", "summary": "Core operating principle for reps"}}
+    {{"name": "Named sales framework or mental model", "summary": "Strategic core principle"}}
   ]
 }}
 """

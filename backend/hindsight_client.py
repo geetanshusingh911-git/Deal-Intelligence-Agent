@@ -174,3 +174,39 @@ def reflect_facts(
         return getattr(res, "text", "") or ""
     except Exception:
         return ""
+
+
+def ensure_playbook_mental_models() -> List[Dict[str, str]]:
+    """Ensure standard mental models are registered in the global playbook bank."""
+    client = get_hindsight_client()
+    ensure_bank("playbook", is_playbook=True)
+
+    standard_models = [
+        {
+            "id": "cfo-budget-strategy",
+            "name": "CFO Budget & Payback Alignment",
+            "source_query": "What objection handling strategies and pricing concessions win deals with skeptical CFOs?",
+            "summary": "Proactively decouple upfront implementation costs into quarterly milestones to bypass board approval limits while providing a 9-month ROI breakeven model.",
+        },
+        {
+            "id": "cto-risk-inoculation",
+            "name": "Technical Risk Inoculation",
+            "source_query": "What technical evidence, SLA documentation, and proof points win over risk-averse CTOs?",
+            "summary": "Present sub-second API uptime guarantees, pre-built ERP integration connectors, and SOC2 compliance reports early to eliminate engineering migration hesitation.",
+        },
+    ]
+
+    for sm in standard_models:
+        try:
+            client.create_mental_model(
+                bank_id="playbook",
+                id=sm["id"],
+                name=sm["name"],
+                source_query=sm["source_query"],
+            )
+        except Exception:
+            # Model already exists or bank in use
+            pass
+
+    return standard_models
+
