@@ -1,0 +1,28 @@
+{
+  "brief": "Sarah Jenkins (CFO) explained that any contract over $150k requires board sign\u2011off unless payments are amortized quarterly. She said that if the deal is structured with quarterly billing over 12 months, she can approve it within her executive threshold.",
+  "open_objections": [
+    {
+      "text": "Contracts over $150k need board sign\u2011off unless payments are amortized quarterly.",
+      "raised_in_call": 4,
+      "by": "CFO"
+    }
+  ],
+  "stakeholders": [
+    {
+      "name": "Sarah Jenkins",
+      "role": "CFO",
+      "stance": "Cautious",
+      "concerns": "Board approval requirement for contracts >$150k; prefers quarterly billing over 12 months to stay within executive threshold."
+    }
+  ],
+  "promises": [
+    {
+      "text": "Will approve the contract under her executive threshold if quarterly billing over 12 months is provided.",
+      "made_by": "Sarah Jenkins",
+      "due": "Before fiscal quarter end"
+    }
+  ],
+  "recalled_facts": [],
+  "memory_used": false,
+  "playbook_tips": []
+}

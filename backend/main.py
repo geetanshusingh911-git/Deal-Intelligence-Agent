@@ -145,24 +145,35 @@ def create_followup(id: str, payload: Optional[FollowupRequest] = None):
 
     memory_mode = (payload.memory if payload and payload.memory else "on").lower()
     brief_data = brief_agent(deal_id=id, memory=memory_mode)
+    calls = deal.get("calls", [])
+    latest_call = calls[-1] if calls else {}
 
     if memory_mode == "off":
         prompt = f"""
-Write a professional post-call follow-up email to the customer for {deal.get('company')}.
-You only know what was discussed in the latest call:
-{brief_data.get('brief')}
+Write a follow-up email to the customer for {deal.get('company')} based EXCLUSIVELY on the latest call (Call {latest_call.get('call_no')}).
+You have NO memory of any previous calls, past objections, or earlier commitments.
+Latest call discussion:
+{latest_call.get('transcript', '')}
 
-Keep it polite, professional, and concise.
+Write a standard, generic follow-up email that only mentions what was said in this call today. Do not reference any past calls or history.
 """
     else:
         prompt = f"""
-Write an executive, personalized post-call follow-up email for {deal.get('company')} ($ {deal.get('value')}).
-Incorporate these specific elements recalled from memory:
-- Open objections being addressed: {json.dumps(brief_data.get('open_objections', []))}
-- Stakeholders to address: {json.dumps(brief_data.get('stakeholders', []))}
-- Promises and deliverables committed to: {json.dumps(brief_data.get('promises', []))}
+Write an executive, highly personalized follow-up email to the customer stakeholders at {deal.get('company')} (${deal.get('value')}).
+You have full historical memory of every call across the sales cycle.
+Synthesized brief from memory:
+{brief_data.get('brief')}
 
-Make the email concise, persuasive, and structured with clear next steps.
+Key objections being addressed:
+{json.dumps(brief_data.get('open_objections', []))}
+
+Key promises made across calls:
+{json.dumps(brief_data.get('promises', []))}
+
+Stakeholders to address:
+{json.dumps(brief_data.get('stakeholders', []))}
+
+Write a comprehensive, personalized follow-up email addressing both Sarah Jenkins (CFO) and David Chen (CTO). Specifically cite the resolution to David's earlier ERP integration and uptime concerns (attaching the promised SOC2 and SAP connector specs), and directly address Sarah's budget threshold with the proposed quarterly amortization schedule.
 """
     email_text = call_llm_text(prompt)
     return {"email": email_text}

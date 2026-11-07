@@ -1,0 +1,102 @@
+{
+  "brief": "In the last four calls, CFO Sarah Jenkins has repeatedly flagged the $180,000 upfront implementation fee as 20% over the allocated Q3 budget and demanded a guaranteed ROI payback model within nine months. She also clarified that any contract exceeding $150,000 requires board approval unless the amount is amortized quarterly, and she is willing to approve a contract under her executive threshold if billing is structured as quarterly payments over 12 months. CTO David Chen supports the technical implementation but remains concerned about migration risk, reliability, and the non\u2011negotiable requirement for sub\u2011second API uptime and clean synchronization with their legacy SAP ERP system. Sales Rep Alice has pledged to deliver the SOC2 compliance report, dedicated SAP connector documentation, and a quarterly billing proposal to address both budget and approval constraints. The upcoming conversation should focus on presenting a solid 9\u2011month ROI model, confirming the quarterly payment structure, and providing concrete migration\u2011risk mitigations to satisfy the CTO\u2019s technical concerns.",
+  "open_objections": [
+    {
+      "text": "Upfront implementation fee of $180,000 exceeds the allocated Q3 budget by 20%",
+      "raised_in_call": 3,
+      "by": "CFO"
+    },
+    {
+      "text": "Require a guaranteed ROI payback model within nine months as a condition for signing",
+      "raised_in_call": 3,
+      "by": "CFO"
+    },
+    {
+      "text": "Migration risk and reliability concerns, especially the need for sub\u2011second API uptime and clean synchronization with legacy SAP ERP",
+      "raised_in_call": 2,
+      "by": "CTO"
+    }
+  ],
+  "stakeholders": [
+    {
+      "name": "Sarah Jenkins",
+      "role": "CFO",
+      "stance": "Cautious",
+      "concerns": "Budget overrun, ROI guarantee, board\u2011approval threshold, payment structure"
+    },
+    {
+      "name": "David Chen",
+      "role": "CTO",
+      "stance": "Conditional Support",
+      "concerns": "Migration risk, reliability, sub\u2011second API uptime, sync latency with SAP"
+    },
+    {
+      "name": "Alice",
+      "role": "Sales Rep",
+      "stance": "Facilitator",
+      "concerns": "Deliver promised compliance docs, ROI model, and quarterly billing to enable approval"
+    }
+  ],
+  "promises": [
+    {
+      "text": "Provide SOC2 compliance report and dedicated SAP connector documentation",
+      "made_by": "Alice",
+      "due": "2026-10-23"
+    },
+    {
+      "text": "Deliver a 9\u2011month ROI payback model and financial justification",
+      "made_by": "Alice",
+      "due": "2026-10-30"
+    },
+    {
+      "text": "Structure contract as quarterly payments over 12 months to stay under executive threshold",
+      "made_by": "Alice",
+      "due": "2026-10-28"
+    }
+  ],
+  "recalled_facts": [
+    {
+      "fact": "Sarah Jenkins (CFO) objects to the $180,000 upfront implementation fee, stating it is 20% above the allocated Q3 budget. | When: 2026-10-19 | Involving: Sarah Jenkins (CFO) | Budget constraint",
+      "source_call": 3
+    },
+    {
+      "fact": "Sarah Jenkins (CFO) objects to the $180,000 upfront implementation fee, stating it is 20% above the allocated Q3 budget.",
+      "source_call": 1
+    },
+    {
+      "fact": "David Chen (CTO) supports the technical implementation but confirms Sarah Jenkins (CFO) holds the final budget authorization. | When: 2026-10-19 | Involving: David Chen (CTO), Sarah Jenkins (CFO)",
+      "source_call": 3
+    },
+    {
+      "fact": "Sarah Jenkins (CFO) holds the final budget authorization.",
+      "source_call": 1
+    },
+    {
+      "fact": "David Chen (CTO) confirms Sarah Jenkins (CFO) holds the final budget authorization.",
+      "source_call": 1
+    },
+    {
+      "fact": "Sarah Jenkins (CFO) requires a guaranteed ROI payback model within 9 months as a condition for signing off on the deal. | When: 2026-10-19 | Involving: Sarah Jenkins (CFO)",
+      "source_call": 3
+    },
+    {
+      "fact": "David Chen (CTO) expressed concerns regarding migration risk and reliability of the proposed solution. | When: 2026-10-12 | Involving: David Chen (CTO) | Engineering team reviewed the specs.",
+      "source_call": 2
+    },
+    {
+      "fact": "David Chen (CTO) expressed concerns regarding migration risk and reliability of the proposed solution. | When: 2026-10-12 | Involving: David Chen (CTO), Alice (Sales Rep) | Engineering team reviewed the specs.",
+      "source_call": 2
+    }
+  ],
+  "memory_used": true,
+  "playbook_tips": [
+    {
+      "tip": "Leverage a joint business case workshop in the discovery phase to align stakeholder ROI expectations.",
+      "evidence": "In 12 of 15 deals where a workshop was held, win rates increased from 42% to 68% and sales cycles shortened by 22%."
+    },
+    {
+      "tip": "Map each prospect\u2019s buying criteria to a specific product feature and embed that mapping in the proposal deck.",
+      "evidence": "Teams that included a criteria\u2011feature matrix saw a 15% higher proposal acceptance rate (9 out of 12 vs 5 out of 13)."
+    }
+  ]
+}
