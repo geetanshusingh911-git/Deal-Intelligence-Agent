@@ -1,0 +1,7 @@
+fastapi
+uvicorn
+groq
+python-dotenv
+requests
+# Hindsight client: confirm the exact PyPI package name in the Hindsight docs
+# (https://hindsight.vectorize.io/) before adding it here.
